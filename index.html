@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        
+
+
+
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+
+
+
+
+
+      <script>
+
+        let rockPaperScissors = ["rock", "paper", "scissors"]
+        let playerSelection;
+        let computerSelection;
+
+        let body = document.querySelector("body");
+        let gameResult = document.createElement("p");
+        gameResult.textContent = "First to 5 wins!";
+        body.appendChild(gameResult);
+        let matchResult;
+        let wins = 0;
+        let losses = 0;
+        scoreboardWins = document.createElement("p");
+        scoreboardWins.textContent = `Your Wins: ${wins}`;
+        body.appendChild(scoreboardWins);
+        scoreboardLosses = document.createElement("p");
+        scoreboardLosses.textContent = `Computer Wins: ${losses}`;
+        body.appendChild(scoreboardLosses);
+
+
+        function computerPlay() {
+            let rand = Math.floor(Math.random() * 3);
+            gameResult.textContent += `Computer chose ${rockPaperScissors[rand]}, `;
+            return rockPaperScissors[rand];
+        }
+
+      
+        function playRound(playerSelection, computerSelection) {
+            computerSelection = computerPlay();
+            if (playerSelection === "scissors") {
+                if (computerSelection === "rock") {
+                    gameResult.textContent += "you lost!";
+                    return "lose";
+                } else if (computerSelection === "paper") {
+                    gameResult.textContent += "you win!";
+                    return "win";
+                } else {
+                    gameResult.textContent += "Tie!";
+                    return "tie";
+                }
+            }
+            if (playerSelection === "paper") {
+                if (computerSelection === "rock") {
+                    gameResult.textContent += "you win!";
+                    return "win";
+                } else if (computerSelection === "scissors") {
+                    gameResult.textContent += "you lost!";
+                    return "lose";
+                } else {
+                    gameResult.textContent += "Tie!";
+                    return "tie";
+            }
+        }
+            if (playerSelection === "rock") {
+                if (computerSelection === "paper") {
+                    gameResult.textContent += "you lost!";
+                    return "lose";
+                } else if (computerSelection === "scissors") {
+                    gameResult.textContent += "you win!";
+                    return "win";
+                } else {
+                    gameResult.textContent += "Tie!";
+                    return "tie";
+                }
+             }
+        }      
+
+        const rock = document.querySelector(".rock");
+        const paper = document.querySelector(".paper");
+        const scissors = document.querySelector(".scissors");
+        rock.addEventListener("click", () => {
+            gameResult.textContent = "";
+            matchResult = playRound("rock");
+            increaseScore(matchResult);
+    });
+        paper.addEventListener("click", () => {
+            gameResult.textContent = "";
+            matchResult = playRound("rock");
+            increaseScore(matchResult);
+        });
+        scissors.addEventListener("click", () => {
+            gameResult.textContent = "";
+            matchResult = playRound("rock");
+            increaseScore(matchResult);
+        });
+
+        let endingScore;
+
+        function increaseScore (result) {
+            if (result === "win") {
+                wins += 1;
+                scoreboardWins.textContent = `Wins: ${wins}`;
+            } else if (result === "lose") {
+                losses += 1;
+                scoreboardLosses.textContent = `Losses: ${losses}`;
+            }
+
+            if (wins === 5) {
+                endingScore = "Final score = " + wins + " / " + losses;
+                gameResult.textContent += " You won it all, hooray!!";
+                wins = 0;
+                scoreboardWins.textContent = `Wins: ${wins}`;
+                losses = 0;
+                scoreboardLosses.textContent = `Losses: ${losses}`;
+                let finalScore = document.createElement("p");
+                finalScore.textContent = endingScore;
+                body.appendChild(finalScore);
+            } else if (losses === 5) {
+                endingScore = "Final score = " + wins + " / " + losses;
+                gameResult.textContent += " GAME OVER!!";
+                wins = 0;
+                scoreboardWins.textContent = `Wins: ${wins}`;
+                losses = 0;
+                scoreboardLosses.textContent = `Losses: ${losses}`;
+                let finalScore = document.createElement("p");
+                finalScore.textContent = endingScore;
+                body.appendChild(finalScore);
+            }
+
+        }
+
+
+        // function game() {
+        //     let win = 0;
+        //     let result;
+        //     for (i = 0; i < 5; i++) {
+        //         result = playRound(playerSelection, computerSelection);
+        //         if (result === "win") {
+        //             win++;
+        //             console.log(`Scoreboard: you've won ${win}/5 times!`);
+        //         } else if (result === "lose") {
+        //             console.log("you lost!");
+        //         } else if (result === "tie"){
+        //             console.log("Tie! Going again!");
+        //         }
+        //     }
+        //     if (win >= 3) {
+        //         console.log("you won!");
+        //     } else {
+        //         console.log("you didn't win :(");
+        //     }
+        // }
+
+        // game();
+
+      </script>
+    </body>
+
+</html>
